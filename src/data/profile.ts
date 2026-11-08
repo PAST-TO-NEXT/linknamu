@@ -14,7 +14,7 @@ export type LinkItem = {
 // TODO: 보여주기용 더미 값입니다. 실제 내용으로 교체하세요.
 // 사진은 public/ 폴더에 넣고 image 경로를 바꾸면 됩니다.
 export const profile: Profile = {
-  name: "김클로",
+  name: "민현이",
   bio: "세계 최강 바이브코더",
   image: "/profile.svg",
 };
