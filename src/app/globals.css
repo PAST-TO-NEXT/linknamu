@@ -2,10 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
+:root {
   color-scheme: light;
+  --bg-from: #fffaf2; /* 크림 */
+  --bg-to: #ffe3d0; /* 연한 살구 */
+  --blob-a: rgba(255, 196, 160, 0.55);
+  --blob-b: rgba(255, 230, 190, 0.7);
 }
 
 html.dark {
   color-scheme: dark;
+  --bg-from: #1d1815;
+  --bg-to: #2b201b;
+  --blob-a: rgba(214, 120, 80, 0.16);
+  --blob-b: rgba(255, 190, 140, 0.08);
+}
+
+body {
+  background-color: var(--bg-from);
+  background-image:
+    radial-gradient(40rem 28rem at 85% -5%, var(--blob-a), transparent 70%),
+    radial-gradient(36rem 30rem at -10% 105%, var(--blob-b), transparent 70%),
+    linear-gradient(165deg, var(--bg-from) 0%, var(--bg-to) 100%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  word-break: keep-all;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
 }
