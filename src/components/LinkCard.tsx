@@ -1,31 +1,15 @@
 "use client";
 
-import { useState } from "react";
 import type { LinkItem } from "@/data/profile";
 
 type Props = {
   link: LinkItem;
-  initialClicks: number;
+  clicks: number;
+  onClick: (id: string) => void;
 };
 
-export default function LinkCard({ link, initialClicks }: Props) {
-  const [clicks, setClicks] = useState(initialClicks);
-
-  const handleClick = () => {
-    setClicks((c) => c + 1);
-    const body = JSON.stringify({ id: link.id });
-    // 페이지를 떠나도 요청이 끊기지 않도록 sendBeacon 우선 사용
-    if (typeof navigator !== "undefined" && navigator.sendBeacon) {
-      navigator.sendBeacon("/api/click", new Blob([body], { type: "application/json" }));
-    } else {
-      fetch("/api/click", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body,
-        keepalive: true,
-      }).catch(() => {});
-    }
-  };
+export default function LinkCard({ link, clicks, onClick }: Props) {
+  const handleClick = () => onClick(link.id);
 
   return (
     <a
@@ -48,7 +32,7 @@ export default function LinkCard({ link, initialClicks }: Props) {
         title="클릭 수"
         aria-label={`클릭 ${clicks}회`}
       >
-        {clicks.toLocaleString("ko-KR")}
+        {clicks.toLocaleString("ko-KR")}회
       </span>
       <svg
         aria-hidden
